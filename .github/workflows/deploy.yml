@@ -38,11 +38,11 @@ jobs:
           aws sts get-caller-identity
 
       # Step 3 - check the application-name and deployment group name
-      # - name: Create CodeDeploy Deployment
-      #   id: deploy
-      #   run: |
-      #     aws deploy create-deployment \
-      #       --application-name aws \
-      #       --deployment-group-name aws-app-production \
-      #       --deployment-config-name CodeDeployDefault.AllAtOnce \
-      #       --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+      - name: Create CodeDeploy Deployment
+        id: deploy
+        run: |
+          aws deploy create-deployment \
+            --application-name aws-app \
+            --deployment-group-name aws-app-production \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
