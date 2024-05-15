@@ -2,7 +2,7 @@
 set -x
 
 # System control will return either "active" or "inactive".
-tomcat_running=$(systemctl is-active tomcat)
+tomcat_running=$(systemctl is-active nginx)
 if [ "$tomcat_running" == "active" ]; then
-    service tomcat stop
+    service nginx stop
 fi
