@@ -8,5 +8,3 @@ set -xe
 
 # Ensure the ownership permissions are correct.
 # chown -R tomcat:tomcat /usr/local/tomcat9/webapps
-
-echo "Server did not come up after expected time. Failing."
