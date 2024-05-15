@@ -6,3 +6,6 @@ set -x
 # if [ "$tomcat_running" == "active" ]; then
 #     service nginx stop
 # fi
+
+echo "Server did not come up after expected time. Failing."
+exit 1
