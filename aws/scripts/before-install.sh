@@ -2,7 +2,7 @@
 set -xe
 
 # Delete the old  directory as needed.
-if [ -d /usr/local/codedeployresources ]; then
+if [ -d /var/www/html/aws ]; then
     rm -rf /var/www/html/aws
 fi
 
