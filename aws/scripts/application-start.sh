@@ -2,4 +2,4 @@
 set -xe
 
 # Start Tomcat, the application server.
-service nginx start
+# service nginx start
