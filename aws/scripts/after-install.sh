@@ -2,6 +2,8 @@
 set -xe
 
 
+cd /var/www/html/aws
+
 # Copy war file from S3 bucket to tomcat webapp folder
 # aws s3 cp s3://##s3-bucket##/SpringBootHelloWorldExampleApplication.war /usr/local/tomcat9/webapps/SpringBootHelloWorldExampleApplication.war
 

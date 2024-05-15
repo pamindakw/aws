@@ -33,6 +33,15 @@ jobs:
           #change to reflect your IAM role’s ARN
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Clone repository to /var/www/html
+        run: ssh ubuntu@ec2-13-233-255-236.ap-south-1.compute.amazonaws.com "git clone https://github.com/pamindakw/aws.git /var/www/html"
+
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
         run: |
