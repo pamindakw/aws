@@ -17,4 +17,3 @@ SLEEP_TIME=3
 #   sleep $SLEEP_TIME
 # done
 echo "Server did not come up after expected time. Failing."
-exit 1

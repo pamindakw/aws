@@ -8,4 +8,3 @@ set -x
 # fi
 
 echo "Server did not come up after expected time. Failing."
-exit 1

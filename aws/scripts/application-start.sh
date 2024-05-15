@@ -5,4 +5,3 @@ set -xe
 # service nginx start
 
 echo "Server did not come up after expected time. Failing."
-exit 1

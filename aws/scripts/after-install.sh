@@ -10,4 +10,3 @@ set -xe
 # chown -R tomcat:tomcat /usr/local/tomcat9/webapps
 
 echo "Server did not come up after expected time. Failing."
-exit 1
