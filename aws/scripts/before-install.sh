@@ -8,5 +8,3 @@ fi
 
 mkdir -vp /var/www/html/aws
 
-
-echo "Server did not come up after expected time. Failing."
