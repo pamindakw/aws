@@ -8,53 +8,29 @@ env:
   AWS_REGION: ap-south-1
 
 jobs:
-  build:
-    name: Build and Package
+  AssumeRoleAndCallIdentity:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout Repository
-
-      - uses: aws-actions/configure-aws-credentials@v1
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-          role-session-name: GitHub-Action-Role
+          role-to-assume: arn:aws:iam::861423417733:role/GitHubAction-AssumeRoleWithAction
+          #change to reflect your IAM role’s ARN
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
+      # Hello from AWS: WhoAmI
+      - name: Sts GetCallerIdentity
+        run: |
+          aws sts get-caller-identity
 
-      # - name: Set up JDK 1.8
-      #   uses: actions/setup-java@v1
-      #   with:
-      #     java-version: 1.8
-
-      - name: chmod
-        run: chmod -R +x ./.github
-
-      # - name: Build and Package Maven
-      #   id: package
-      #   working-directory: ${{ env.applicationfolder }}
-      #   run: $GITHUB_WORKSPACE/.github/scripts/build.sh
-
-      # - name: Upload Artifact to s3
-      #   working-directory: ${{ env.applicationfolder }}/target
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment: Dev
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v2
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-          role-session-name: GitHub-Action-Role
-          aws-region: ${{ env.AWS_REGION }}
-      - run: |
-          echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
-          commit_hash=`git rev-parse HEAD`
-          aws deploy create-deployment --application-name CodeDeployAppNameWithASG --deployment-group-name CodeDeployGroupName --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
+      # Step 3 - check the application-name and deployment group name
+      - name: Create CodeDeploy Deployment
+        id: deploy
+        run: |
+          aws deploy create-deployment \
+          --application-name aws-app \ 
+          --deployment-group-name aws-app-production \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
