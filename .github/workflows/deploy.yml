@@ -33,7 +33,8 @@ jobs:
           #change to reflect your IAM role’s ARN
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
-
+      
+      # SSH Connection
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.5.3
         with:
