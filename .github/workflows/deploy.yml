@@ -43,8 +43,7 @@ jobs:
       # SSH AWS
       - name: Clone repository to /var/www/html
         run: |
-          sudo chown -R $USER /var/www/html &&
-          git clone https://github.com/pamindakw/aws.git /var/www/html/aws
+          echo "${{ secrets.EC2_SSH_KEY }}"
 
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
