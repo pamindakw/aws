@@ -43,10 +43,8 @@ jobs:
       # SSH AWS
       - name: Clone repository to /var/www/html
         run: |
-          whoami &&
-          chmod -R 777 ./ &&
-          ls /var/www/html &&
-          git clone https://github.com/pamindakw/aws.git /var/www/html/aws/
+          sudo chown -R $USER /var/www/html &&
+          git clone https://github.com/pamindakw/aws.git /var/www/html/aws
 
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
