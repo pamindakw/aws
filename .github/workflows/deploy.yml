@@ -44,7 +44,7 @@ jobs:
       - name: Clone repository to /var/www/html
         run: |
           ls /var/www/html &&
-          git clone https://github.com/pamindakw/aws.git /var/www/html/aws
+          git clone https://github.com/pamindakw/aws.git /var/www/html/aws/
 
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
