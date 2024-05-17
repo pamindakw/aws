@@ -43,7 +43,7 @@ jobs:
       # SSH AWS
       - name: Clone repository to /var/www/html
         run: |
-          ls /var/www/html &&
+          ls /var/www/html/aws &&
           git clone https://github.com/pamindakw/aws.git /var/www/html/aws/
 
       # Hello from AWS: WhoAmI
