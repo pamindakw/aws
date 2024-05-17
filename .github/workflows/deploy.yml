@@ -43,7 +43,12 @@ jobs:
       # SSH AWS
       - name: Clone repository to /var/www/html
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}"
+          mkdir -p ~/.ssh &&
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa &&
+          chmod 600 ~/.ssh/id_rsa &&
+          ssh-keyscan -H ec2-65-0-180-108.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts && 
+          cat  ~/.ssh/known_hosts &&
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-65-0-180-108.ap-south-1.compute.amazonaws.com "git clone https://github.com/pamindakw/aws.git /var/www/html/aws"
 
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
