@@ -43,7 +43,7 @@ jobs:
       # SSH AWS
       - name: Clone repository to /var/www/html
         run: |
-          echo "${{ secrets.EC2_SSH_KEY }}"
+          echo "${{ secrets.SSH_PRIVATE_KEY }}"
 
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
