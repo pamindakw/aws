@@ -42,7 +42,7 @@ jobs:
 
       # SSH AWS
       - name: Clone repository to /var/www/html
-        run: git clone https://github.com/pamindakw/aws.git /var/www/html
+        run: git clone https://github.com/pamindakw/aws.git /var/www/html/aws
 
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
