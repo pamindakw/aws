@@ -44,6 +44,7 @@ jobs:
       - name: Clone repository to /var/www/html
         run: |
           mkdir -p ~/.ssh &&
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa &&
           chmod 600 ~/.ssh/id_rsa &&
           ssh-keyscan -H ec2-65-0-180-108.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts && 
