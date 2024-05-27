@@ -46,7 +46,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa &&
           ssh-keyscan -H ec2-65-0-180-108.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts && 
           cat  ~/.ssh/known_hosts &&
-          ssh -o StrictHostKeyChecking=no ubuntu@ec2-65-0-180-108.ap-south-1.compute.amazonaws.com "sudo chmod -R 777 /var/www/html/aws && ls -la /var/www/html && git clone git@github.com:pamindakw/aws.git /var/www/html/aws"
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-65-0-180-108.ap-south-1.compute.amazonaws.com "if [ -d "/var/www/html/aws" ]; then
+  echo "$DIRECTORY does exist." && rmdir /var/www/html/aws else sudo chmod -R 777 /var/www/html/aws && ls -la /var/www/html && git clone git@github.com:pamindakw/aws.git /var/www/html/aws fi"
 
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
